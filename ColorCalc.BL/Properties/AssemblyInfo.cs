@@ -8,9 +8,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("ColorCalc.BL")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Cornelsen Verlag GmbH")]
+[assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("ColorCalc.BL")]
-[assembly: AssemblyCopyright("Copyright © Cornelsen Verlag GmbH 2017")]
+[assembly: AssemblyCopyright("Copyright ©")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
