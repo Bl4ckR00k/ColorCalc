@@ -93,5 +93,11 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ColorCalc.BL\ColorCalc.BL.csproj">
+      <Project>{c572840f-3c2d-4eac-84db-c5e5bbd219ce}</Project>
+      <Name>ColorCalc.BL</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

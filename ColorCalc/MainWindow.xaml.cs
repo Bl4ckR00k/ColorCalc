@@ -1,20 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-
-namespace ColorCalc
+﻿namespace ColorCalc
 {
+    using System.Windows;
+    using System.Windows.Controls;
+
+    using ColorCalc.BL;
+    using System.Windows.Media;
+    using System;
+
     /// <summary>
     /// Interaktionslogik für MainWindow.xaml
     /// </summary>
@@ -23,6 +15,36 @@ namespace ColorCalc
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void tb_Input_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
+        {
+            var inputString = (sender as TextBox).Text;
+
+            var resultRGBArray = ColorCalc.GetRgbFromString(inputString);
+
+            var resultHexString = ColorCalc.CalculateHexFromRgb(resultRGBArray);
+
+            try
+            {
+                tb_Output.Text = resultHexString;
+            }
+            catch (System.Exception)
+            {
+            }
+
+            try
+            {
+                grid_main.Background = new SolidColorBrush(Color.FromRgb(byte.Parse(resultRGBArray[0].ToString()), byte.Parse(resultRGBArray[1].ToString()), byte.Parse(resultRGBArray[2].ToString())));
+            }
+            catch (System.Exception)
+            {
+            }
+        }
+
+        private void tb_Input_GotFocus(object sender, RoutedEventArgs e)
+        {
+            tb_Input.Text = "";
         }
     }
 }
