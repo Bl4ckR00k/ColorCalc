@@ -1,5 +1,5 @@
 # ColorCalc
-It's an tool to convert the userinput from commaseperated RGB-Integers to a hexString like #FF00FF
+It's an tool to convert the userinput from commaseperated RGB-Integers to a Hex-String like this: #FF00FF
 
 
 To try out the app, you can find the executable files here: 
