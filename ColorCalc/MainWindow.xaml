@@ -5,14 +5,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ColorCalc"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+        Title="ColorCalc" Height="350" Width="525">
     <Grid x:Name="grid_main">
-        <DockPanel HorizontalAlignment="Left" Height="150" LastChildFill="False" Margin="10,10,0,0" VerticalAlignment="Top" Width="497">
-            <TextBox x:Name="tb_Input" Height="130" TextWrapping="Wrap" Text="R,G,B" VerticalAlignment="Center" Width="497" FontSize="72" TextAlignment="Center" HorizontalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" TextChanged="tb_Input_TextChanged" GotFocus="tb_Input_GotFocus" BorderBrush="{x:Null}" Background="White" Margin="0,10"/>
-        </DockPanel>
-        <DockPanel HorizontalAlignment="Left" Height="150" LastChildFill="False" Margin="10,159,0,0" VerticalAlignment="Top" Width="497">
-            <TextBox x:Name="tb_Output" Height="130" TextWrapping="Wrap" Text="#" VerticalAlignment="Center" Width="495" FontSize="72" TextAlignment="Center" HorizontalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" BorderBrush="{x:Null}" Background="White" Margin="0,10"/>
-        </DockPanel>
-
+        <StackPanel DockPanel.Dock="Top">
+            <TextBox x:Name="tb_Input" Height="140" TextWrapping="Wrap" Text="R,G,B" Margin="10,10,10,5" BorderBrush="{x:Null}" Background="White" FontSize="66" TextAlignment="Center" VerticalContentAlignment="Center"/>
+            <TextBox x:Name="tb_Output" Height="140" TextWrapping="Wrap" Text="#" Margin="10,5,10,10" BorderBrush="{x:Null}" Background="White" FontSize="66" TextAlignment="Center" VerticalContentAlignment="Center"/>
+        </StackPanel>
     </Grid>
 </Window>

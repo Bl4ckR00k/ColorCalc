@@ -15,36 +15,63 @@
         public MainWindow()
         {
             InitializeComponent();
+
+            tb_Input.TextChanged += Tb_Input_TextChanged;
+            tb_Input.GotFocus += Tb_Input_GotFocus;
+
+            tb_Output.GotKeyboardFocus += Tb_Output_SelectAllText;
+            tb_Output.GotMouseCapture += Tb_Output_SelectAllText;
         }
 
-        private void tb_Input_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
+
+        private void Tb_Output_SelectAllText(object sender, RoutedEventArgs e)
         {
-            var inputString = (sender as TextBox).Text;
-
-            var resultRGBArray = ColorCalc.GetRgbFromString(inputString);
-
-            var resultHexString = ColorCalc.CalculateHexFromRgb(resultRGBArray);
-
-            try
+            if (e.OriginalSource is TextBox textBox)
             {
-                tb_Output.Text = resultHexString;
+                textBox.SelectAll();
             }
-            catch (System.Exception)
+        }
+        
+        private void Tb_Input_GotFocus(object sender, RoutedEventArgs e)
+        {
+            if (e.OriginalSource is TextBox textBox)
             {
-            }
-
-            try
-            {
-                grid_main.Background = new SolidColorBrush(Color.FromRgb(byte.Parse(resultRGBArray[0].ToString()), byte.Parse(resultRGBArray[1].ToString()), byte.Parse(resultRGBArray[2].ToString())));
-            }
-            catch (System.Exception)
-            {
+                textBox.Text = string.Empty;
             }
         }
 
-        private void tb_Input_GotFocus(object sender, RoutedEventArgs e)
+        private void Tb_Input_TextChanged(object sender, RoutedEventArgs e)
         {
-            tb_Input.Text = "";
+            if (e.OriginalSource is TextBox textBox)
+            {
+                var inputString = textBox.Text;
+
+                var resultRGBArray = ColorCalc.GetRgbFromString(inputString);
+
+                var resultHexString = ColorCalc.CalculateHexFromRgb(resultRGBArray);
+
+                try
+                {
+                    tb_Output.Text = resultHexString;
+                }
+                catch (Exception)
+                {
+                    // ignored
+                }
+
+                try
+                {
+                    grid_main.Background = new SolidColorBrush(
+                        Color.FromRgb(
+                            byte.Parse(resultRGBArray[0].ToString()), 
+                            byte.Parse(resultRGBArray[1].ToString()), 
+                            byte.Parse(resultRGBArray[2].ToString())));
+                }
+                catch (Exception)
+                {
+                    // ignored
+                }
+            }
         }
     }
 }
