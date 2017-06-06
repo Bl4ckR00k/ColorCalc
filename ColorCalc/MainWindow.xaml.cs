@@ -48,11 +48,13 @@
 
                 var resultRGBArray = ColorCalc.GetRgbFromString(inputString);
 
-                var resultHexString = ColorCalc.CalculateHexFromRgb(resultRGBArray);
+                //var resultHexString = ColorCalc.CalculateHexFromRgb(resultRGBArray);
+
+                var result = ColorCalc.GetColorFromInput(inputString);
 
                 try
                 {
-                    tb_Output.Text = resultHexString;
+                    tb_Output.Text = result.Item1;
                 }
                 catch (Exception)
                 {
@@ -61,17 +63,28 @@
 
                 try
                 {
-                    grid_main.Background = new SolidColorBrush(
-                        Color.FromRgb(
-                            byte.Parse(resultRGBArray[0].ToString()), 
-                            byte.Parse(resultRGBArray[1].ToString()), 
-                            byte.Parse(resultRGBArray[2].ToString())));
+                    //grid_main.Background = new SolidColorBrush(
+                    //    Color.FromRgb(
+                    //        byte.Parse(resultRGBArray[0].ToString()), 
+                    //        byte.Parse(resultRGBArray[1].ToString()), 
+                    //        byte.Parse(resultRGBArray[2].ToString())));
+                    if (result.Item2 != null)
+                    {
+                        grid_main.Background = new SolidColorBrush(ConvertIntoColor(result.Item2));
+                    }
                 }
                 catch (Exception)
                 {
                     // ignored
                 }
             }
+        }
+
+        private static Color ConvertIntoColor(int[] rgb)
+        {
+            return Color.FromRgb(byte.Parse(rgb[0].ToString()),
+                                 byte.Parse(rgb[1].ToString()),
+                                 byte.Parse(rgb[2].ToString()));
         }
     }
 }
