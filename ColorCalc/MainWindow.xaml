@@ -8,8 +8,8 @@
         Title="ColorCalc" Height="350" Width="525">
     <Grid x:Name="grid_main">
         <StackPanel DockPanel.Dock="Top">
-            <TextBox x:Name="tb_Input" Height="140" TextWrapping="Wrap" Text="R,G,B or #" Margin="10,10,10,5" BorderBrush="{x:Null}" Background="White" FontSize="66" TextAlignment="Center" VerticalContentAlignment="Center"/>
-            <TextBox x:Name="tb_Output" Height="140" TextWrapping="Wrap" Text="# or R,G,B" Margin="10,5,10,10" BorderBrush="{x:Null}" Background="White" FontSize="66" TextAlignment="Center" VerticalContentAlignment="Center"/>
+            <TextBox x:Name="tb_Input" Height="100" TextWrapping="Wrap" Text="R,G,B or #" Margin="50,50,50,10" BorderBrush="{x:Null}" Background="White" FontSize="52" TextAlignment="Center" VerticalContentAlignment="Center"/>
+            <TextBox x:Name="tb_Output" Height="100" TextWrapping="Wrap" Text="# or R,G,B" Margin="50,10,50,50" BorderBrush="{x:Null}" Background="White" FontSize="52" TextAlignment="Center" VerticalContentAlignment="Center"/>
         </StackPanel>
     </Grid>
 </Window>
