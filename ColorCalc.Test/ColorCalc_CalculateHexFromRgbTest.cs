@@ -1,7 +1,8 @@
 ﻿namespace ColorCalcTest
 {
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
     using ColorCalc.BL;
+
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     [TestClass]
     public class ColorCalc_CalculateHexFromRgbTest

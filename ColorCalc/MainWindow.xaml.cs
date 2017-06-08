@@ -23,6 +23,12 @@
             tb_Output.GotMouseCapture += Tb_Output_SelectAllText;
         }
 
+        private static Color ConvertIntoColor(int[] rgb)
+        {
+            return Color.FromRgb(byte.Parse(rgb[0].ToString()),
+                                 byte.Parse(rgb[1].ToString()),
+                                 byte.Parse(rgb[2].ToString()));
+        }
 
         private void Tb_Output_SelectAllText(object sender, RoutedEventArgs e)
         {
@@ -46,9 +52,7 @@
             {
                 var inputString = textBox.Text;
 
-                var resultRGBArray = ColorCalc.GetRgbFromString(inputString);
-
-                //var resultHexString = ColorCalc.CalculateHexFromRgb(resultRGBArray);
+                var resultRgbArray = ColorCalc.GetRgbFromString(inputString);
 
                 var result = ColorCalc.GetColorFromInput(inputString);
 
@@ -63,11 +67,6 @@
 
                 try
                 {
-                    //grid_main.Background = new SolidColorBrush(
-                    //    Color.FromRgb(
-                    //        byte.Parse(resultRGBArray[0].ToString()), 
-                    //        byte.Parse(resultRGBArray[1].ToString()), 
-                    //        byte.Parse(resultRGBArray[2].ToString())));
                     if (result.Item2 != null)
                     {
                         grid_main.Background = new SolidColorBrush(ConvertIntoColor(result.Item2));
@@ -78,13 +77,6 @@
                     // ignored
                 }
             }
-        }
-
-        private static Color ConvertIntoColor(int[] rgb)
-        {
-            return Color.FromRgb(byte.Parse(rgb[0].ToString()),
-                                 byte.Parse(rgb[1].ToString()),
-                                 byte.Parse(rgb[2].ToString()));
         }
     }
 }

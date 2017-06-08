@@ -9,7 +9,7 @@
         {
             var result = new Tuple<string, int[]>(string.Empty, null);
 
-            if(input.Contains(",") || input.Contains("."))
+            if (input.Contains(",") || input.Contains("."))
             {
                 var rgb = GetRgbFromString(input);
                 var hex = CalculateHexFromRgb(rgb);
@@ -19,10 +19,12 @@
                     result = new Tuple<string, int[]>(hex, rgb);
                 }
             }
-            else if(input.Contains("#"))
+            else if (input.Contains("#"))
             {
                 var hex = GetHexFromString(input);
-                int[] aRgb = null;
+
+                int[] aRgb;
+
                 var rgb = CalculateRgbFromHex(hex, out aRgb);
                 
                 if (aRgb != null)
@@ -59,15 +61,15 @@
             }
             else
             {
-                int[] output = new int[3];
+                var output = new int[3];
 
-                for(int i = 0; i < output.Length; i++)
+                for (var i = 0; i < output.Length; i++)
                 {
                     try
                     {
                         var element = int.Parse(result[i]);
 
-                        if (element < 0 || element > 255 )
+                        if (element < 0 || element > 255)
                         {
                             return null;
                         }
@@ -84,36 +86,26 @@
             }            
         }
 
-        public static string CalculateHexFromRgb(int[] RGB)
+        public static string CalculateHexFromRgb(int[] rgb)
         {
-            if(RGB == null)
-            {
-                return "#";
-            }
-
-            if (RGB.Length != 3)
+            if (rgb?.Length != 3)
             {
                 return "#";
             }
 
             var result = "#";
 
-            for (int i = 0; i < RGB.Length; i++)
+            foreach (var t in rgb)
             {
-                if(RGB[i] < 0 || RGB[i] > 255)
+                if (t < 0 || t > 255)
                 {
                     return "#";
                 }
 
-                result += RGB[i].ToString("X2");
+                result += t.ToString("X2");
             }
 
-            if(result.Length != 7)
-            {
-                return "#";
-            }
-
-            return result;
+            return result.Length != 7 ? "#" : result;
         }
 
         public static string[] GetHexFromString(string input)
@@ -123,65 +115,59 @@
                 return null;
             }
 
-            if(input.Contains("#"))
+            if (!input.Contains("#"))
             {
-                var pat = @"(?:#|0x)?(?:[0-9A-F]{2}){3,4}";
-
-                Regex r = new Regex(pat, RegexOptions.IgnoreCase);
-
-                Match m = r.Match(input);
-
-                if(m.Success)
-                { 
-                    if (input.Length == 7)
-                    {
-                        var result = new string[3];
-                        result[0] = input.Substring(1, 2);
-                        result[1] = input.Substring(3, 2);
-                        result[2] = input.Substring(5, 2);
-
-                        return result;
-                    }
-                }
-
+                return null;
             }
-            return null;
+
+            const string Pat = @"(?:#|0x)?(?:[0-9A-F]{2}){3,4}";
+
+            var r = new Regex(Pat, RegexOptions.IgnoreCase);
+
+            var m = r.Match(input);
+
+            if (!m.Success)
+            {
+                return null;
+            }
+
+            if (input.Length != 7)
+            {
+                return null;
+            }
+
+            var result = new string[3];
+            result[0] = input.Substring(1, 2);
+            result[1] = input.Substring(3, 2);
+            result[2] = input.Substring(5, 2);
+
+            return result;
         }
 
-        public static string CalculateRgbFromHex(string[] Hex, out int[] aRgb)
+        public static string CalculateRgbFromHex(string[] hex, out int[] aRgb)
         {
             aRgb = null;
 
-            if (Hex == null)
+            if (hex?.Length != 3)
             {
                 return ",,";
             }
 
-            if (Hex.Length != 3)
+            var result = string.Empty;
+
+            for (var i = 0; i < hex.Length; i++)
             {
-                return ",,";
-            }
+                var r = new Regex(@"(?:[0-9A-F]{2})", RegexOptions.IgnoreCase);
 
-            var result = "";
-
-            for (int i = 0; i < Hex.Length; i++)
-            {
-                Regex r = new Regex(@"(?:[0-9A-F]{2})", RegexOptions.IgnoreCase);
-
-                if (r.Match(Hex[i]).Success)
+                if (r.Match(hex[i]).Success)
                 {
-                    result += Convert.ToInt32(Hex[i], 16).ToString() + (i == 2 ? "": ",");
+                    result += Convert.ToInt32(hex[i], 16) + (i == 2 ? string.Empty : ",");
                 }
             }
 
             aRgb = GetRgbFromString(result);
 
-            if(aRgb == null)
-            {
-                return ",,";
-            }
-
-            return result;
+            return aRgb == null ? ",," : result;
         }
     }
 }

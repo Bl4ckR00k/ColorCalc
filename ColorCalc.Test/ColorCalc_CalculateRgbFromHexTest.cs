@@ -1,7 +1,8 @@
 ﻿namespace ColorCalcTest
 {
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
     using ColorCalc.BL;
+
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     [TestClass]
     public class ColorCalc_CalculateRgbFromHexTest
@@ -9,9 +10,11 @@
         [TestMethod]
         public void Assert_CalculateRgbFromHex_Correct1()
         {
-            string[] input = new string[] { "7B", "7B", "7B" };
+            string[] input = { "7B", "7B", "7B" };
 
-            var result = ColorCalc.CalculateRgbFromHex(input, out int[] aRGB);
+            int[] aRgb;
+
+            var result = ColorCalc.CalculateRgbFromHex(input, out aRgb);
 
             Assert.AreEqual("123,123,123", result);
         }
@@ -19,9 +22,11 @@
         [TestMethod]
         public void Assert_CalculateRgbFromHex_Correct2()
         {
-            string[] input = new string[] { "00","00","00" };
+            string[] input = { "00", "00", "00" };
 
-            var result = ColorCalc.CalculateRgbFromHex(input, out int[] aRGB);
+            int[] aRgb;
+
+            var result = ColorCalc.CalculateRgbFromHex(input, out aRgb);
 
             Assert.AreEqual("0,0,0", result);
         }
@@ -29,9 +34,11 @@
         [TestMethod]
         public void Assert_CalculateRgbFromHex_Correct3()
         {
-            string[] input = new string[] { "FF", "FF", "FF" };
+            string[] input = { "FF", "FF", "FF" };
 
-            var result = ColorCalc.CalculateRgbFromHex(input, out int[] aRGB);
+            int[] aRgb;
+
+            var result = ColorCalc.CalculateRgbFromHex(input, out aRgb);
 
             Assert.AreEqual("255,255,255", result);
         }
@@ -39,9 +46,11 @@
         [TestMethod]
         public void Assert_CalculateRgbFromHex_Correct4()
         {
-            string[] input = new string[] { "01", "01", "01" };
+            string[] input = { "01", "01", "01" };
 
-            var result = ColorCalc.CalculateRgbFromHex(input, out int[] aRGB);
+            int[] aRgb;
+
+            var result = ColorCalc.CalculateRgbFromHex(input, out aRgb);
 
             Assert.AreEqual("1,1,1", result);
         }
@@ -49,9 +58,11 @@
         [TestMethod]
         public void Assert_CalculateRgbFromHex_Failure1()
         {
-            string[] input = new string[] { "FF", "FF", "FG" };
+            string[] input = { "FF", "FF", "FG" };
 
-            var result = ColorCalc.CalculateRgbFromHex(input, out int[] aRGB);
+            int[] aRgb;
+
+            var result = ColorCalc.CalculateRgbFromHex(input, out aRgb);
 
             Assert.AreEqual(",,", result);
         }
@@ -59,9 +70,11 @@
         [TestMethod]
         public void Assert_CalculateRgbFromHex_Failure2()
         {
-            string[] input = new string[] { "FF", "FF" };
+            string[] input = { "FF", "FF" };
 
-            var result = ColorCalc.CalculateRgbFromHex(input, out int[] aRGB);
+            int[] aRgb;
+
+            var result = ColorCalc.CalculateRgbFromHex(input, out aRgb);
 
             Assert.AreEqual(",,", result);
         }
@@ -69,9 +82,11 @@
         [TestMethod]
         public void Assert_CalculateRgbFromHex_Failure3()
         {
-            string[] input = new string[] { "XX", "FF", "13" };
+            string[] input = { "XX", "FF", "13" };
 
-            var result = ColorCalc.CalculateRgbFromHex(input, out int[] aRGB);
+            int[] aRgb;
+
+            var result = ColorCalc.CalculateRgbFromHex(input, out aRgb);
 
             Assert.AreEqual(",,", result);
         }
@@ -79,9 +94,11 @@
         [TestMethod]
         public void Assert_CalculateRgbFromHex_Failure4()
         {
-            string[] input = new string[] { "AB", "XX", "67" };
+            string[] input = { "AB", "XX", "67" };
 
-            var result = ColorCalc.CalculateRgbFromHex(input, out int[] aRGB);
+            int[] aRgb;
+
+            var result = ColorCalc.CalculateRgbFromHex(input, out aRgb);
 
             Assert.AreEqual(",,", result);
         }
@@ -89,9 +106,11 @@
         [TestMethod]
         public void Assert_CalculateRgbFromHex_Failure5()
         {
-            string[] input = new string[] { "FF", "6B", "13", "AB" };
+            string[] input = { "FF", "6B", "13", "AB" };
 
-            var result = ColorCalc.CalculateRgbFromHex(input, out int[] aRGB);
+            int[] aRgb;
+
+            var result = ColorCalc.CalculateRgbFromHex(input, out aRgb);
 
             Assert.AreEqual(",,", result);
         }
@@ -99,9 +118,11 @@
         [TestMethod]
         public void Assert_CalculateRgbFromHex_Failure6()
         {
-            string[] input = new string[0];
+            var input = new string[0];
 
-            var result = ColorCalc.CalculateRgbFromHex(input, out int[] aRGB);
+            int[] aRgb;
+
+            var result = ColorCalc.CalculateRgbFromHex(input, out aRgb);
 
             Assert.AreEqual(",,", result);
         }
@@ -109,9 +130,9 @@
         [TestMethod]
         public void Assert_CalculateRgbFromHex_Failure7()
         {
-            string[] input = null;
+            int[] aRgb;
 
-            var result = ColorCalc.CalculateRgbFromHex(input, out int[] aRGB);
+            var result = ColorCalc.CalculateRgbFromHex(null, out aRgb);
 
             Assert.AreEqual(",,", result);
         }
